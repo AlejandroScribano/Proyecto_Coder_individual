@@ -21,7 +21,7 @@
 
 {% block Contenido_3 %}
 
-<form action="AppCentroDeSalud/cuerpoMedicoFormulario" method="POST">{% csrf_token %}
+<form action="/AppCentroDeSalud/cuerpoMedicoFormulario/" method="POST">{% csrf_token %}
     <table>
         {{ miFormulario.as_table }}
     </table>

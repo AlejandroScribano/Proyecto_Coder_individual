@@ -15,6 +15,7 @@ def cuerpoMedicoFormulario(request):
 
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
+            #informacion = miFormulario.clean()
 
             datos = CuerpoMedico(
                 nombre = informacion["nombre"],
