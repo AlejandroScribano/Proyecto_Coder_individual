@@ -1,0 +1,34 @@
+{% extends "AppCentroDeSalud/padre.html" %}
+{% load static %}
+
+
+{% block Contenido_1 %}
+
+<title>Centro De Salud Medino</title>
+
+{% endblock %}
+
+
+
+{% block Contenido_2 %}
+
+<h1>Consultas</h1>
+
+
+{% endblock %}
+
+
+
+{% block Contenido_3 %}
+
+<form action="/AppCentroDeSalud/consultaFormulario/" method="POST">{% csrf_token %}
+    <table>
+        {{ miFormulario.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+
+</form>
+
+
+
+{% endblock %}

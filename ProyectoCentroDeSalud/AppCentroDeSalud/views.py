@@ -1,7 +1,9 @@
+from django import forms
 from django.db.models.enums import IntegerChoices
 from django.shortcuts import render
-from AppCentroDeSalud.models import CuerpoMedico
-from AppCentroDeSalud.forms import CuerpoMedicoFormulario
+from AppCentroDeSalud.models import CuerpoMedico, Pacientes, Consulta
+from AppCentroDeSalud.forms import CuerpoMedicoFormulario, PacientesFormulario, ConsultaFormulario
+
 
 # Create your views here.
 def inicio(request):
@@ -15,8 +17,7 @@ def cuerpoMedicoFormulario(request):
 
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
-            #informacion = miFormulario.clean()
-
+            
             datos = CuerpoMedico(
                 nombre = informacion["nombre"],
                 apellido = informacion["apellido"],
@@ -32,4 +33,56 @@ def cuerpoMedicoFormulario(request):
     else:
         miFormulario = CuerpoMedicoFormulario()
         return render(request, 'AppCentroDeSalud/cuerpoMedicoFormulario.html',{"miFormulario":miFormulario})
+
+
+def pacientesFormulario(request):
+
+    if request.method == "POST":
+
+        miFormulario = PacientesFormulario(request.POST)
+
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+           
+
+            datos = Pacientes(
+                nombre = informacion["nombre"],
+                apellido = informacion["apellido"],
+                documento = informacion["documento"],
+                email = informacion["email"],
+                telefono = informacion["telefono"]
+            )
+            datos.save()
+            return render(request, 'AppCentroDeSalud/inicio.html')
+            
+            
+    else:
+        miFormulario = PacientesFormulario()
+        return render(request, 'AppCentroDeSalud/pacientesFormulario.html',{"miFormulario":miFormulario})
+
+
+def consultaFormulario(request):
+
+    if request.method == "POST":
+
+        miFormulario = ConsultaFormulario(request.POST)
+
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            
+
+            datos = Consulta(
+                nombre = informacion["nombre"],
+                apellido = informacion["apellido"],
+                email = informacion["email"],
+                telefono = informacion["telefono"],
+                consulta_paciente = informacion["consulta_paciente"]
+            )
+            datos.save()
+            return render(request, 'AppCentroDeSalud/inicio.html')
+            
+            
+    else:
+        miFormulario = ConsultaFormulario()
+        return render(request, 'AppCentroDeSalud/consultaFormulario.html',{"miFormulario":miFormulario})
 
