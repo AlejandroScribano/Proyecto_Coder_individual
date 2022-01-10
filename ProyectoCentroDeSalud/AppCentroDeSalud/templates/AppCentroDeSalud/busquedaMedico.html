@@ -1,0 +1,33 @@
+{% extends "AppCentroDeSalud/padre.html" %}
+{% load static %}
+
+
+{% block Contenido_1 %}
+
+<title>Centro De Salud Medino</title>
+
+{% endblock %}
+
+
+
+{% block Contenido_2 %}
+
+<h1>Buscar Médico</h1>
+
+
+{% endblock %}
+
+
+
+{% block Contenido_3 %}
+
+<form action="/AppCentroDeSalud/buscarMedico/" method="GET">
+    <label>Especialidad: </label>
+    <input type="text" name="especialidad" id="especialidad">
+    <input type="submit" value="Buscar">
+
+</form>
+
+
+
+{% endblock %}

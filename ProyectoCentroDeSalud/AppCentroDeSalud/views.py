@@ -1,5 +1,6 @@
 from django import forms
 from django.db.models.enums import IntegerChoices
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from AppCentroDeSalud.models import CuerpoMedico, Pacientes, Consulta
 from AppCentroDeSalud.forms import CuerpoMedicoFormulario, PacientesFormulario, ConsultaFormulario
@@ -9,6 +10,7 @@ from AppCentroDeSalud.forms import CuerpoMedicoFormulario, PacientesFormulario, 
 def inicio(request):
     return render(request, "AppCentroDeSalud/inicio.html")
 
+#cargar datos en model cuerpoMedico
 def cuerpoMedicoFormulario(request):
 
     if request.method == "POST":
@@ -85,4 +87,19 @@ def consultaFormulario(request):
     else:
         miFormulario = ConsultaFormulario()
         return render(request, 'AppCentroDeSalud/consultaFormulario.html',{"miFormulario":miFormulario})
+
+#Buscar datos
+
+def busquedaMedico(request):
+    return render(request, 'AppCentroDeSalud/busquedaMedico.html')
+
+def buscarMedico(request):
+    if request.method == 'GET':
+        especialidad = request.GET['especialidad']
+        medicos = CuerpoMedico.objects.filter(especialidad__icontains=especialidad)
+
+        return render(request, "AppCentroDeSalud/resultadosBusqueda.html", {"medicos":medicos, "especialidad":especialidad})
+    else:
+        return HttpResponse("No enviaste datos")
+
 
