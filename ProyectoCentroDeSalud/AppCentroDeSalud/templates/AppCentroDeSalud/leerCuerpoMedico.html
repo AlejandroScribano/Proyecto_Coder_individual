@@ -1,0 +1,48 @@
+{% extends "AppCentroDeSalud/padre.html" %}
+{% load static %}
+
+
+{% block Contenido_1 %}
+
+<title>Centro De Salud Medino</title>
+
+{% endblock %}
+
+
+
+{% block Contenido_2 %}
+
+
+
+<h3>Cuerpo Médico</h3>
+                 
+{% for medico in medicos %}
+    <li style="color: black;">{{medico}}</li>
+    <a href="{% url 'EliminarMedico' medico.nombre %}" style="color: blue;">Eliminar</a>
+{% endfor %}
+<br><br>
+<a href="{% url 'CuerpoMedicoFormulario' %}" style="color: blue;">Agregar médico</a>
+
+{% endblock %}
+
+
+
+{% block Contenido_3 %}
+
+<!-- Feature Area Starts -->
+<section class="feature-area section-padding">
+    <div class="container">
+        <p>Cuerpo Médico</p>
+                 
+            {% for medico in medicos %}
+                <li>{{medico}}</li>
+                <a href="{% url 'EliminarMedico' medico.nombre %}">Eliminar</a>
+            {% endfor %}
+            <br><br>
+            <a href="{% url 'CuerpoMedicoFormulario' %}">Agregar médico</a>
+        
+    </div>
+</section>
+<!-- Feature Area End -->
+
+{% endblock %}

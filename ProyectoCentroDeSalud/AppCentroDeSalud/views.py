@@ -102,4 +102,22 @@ def buscarMedico(request):
     else:
         return HttpResponse("No enviaste datos")
 
+#CRUD - CUERPO MEDICO
+
+def leerCuerpoMedico(request):
+    medicos = CuerpoMedico.objects.all()
+    contexto = {"medicos": medicos}
+    return render(request, 'AppCentroDeSalud/leerCuerpoMedico.html', contexto)
+
+def eliminarMedico(request, medico_nombre):
+    medico = CuerpoMedico.objects.get(nombre = medico_nombre)
+    medico.delete()
+
+    medicos = CuerpoMedico.objects.all()
+    contexto = {"medicos": medicos}
+    return render(request, 'AppCentroDeSalud/leerCuerpoMedico.html', contexto)
+     
+
+#FIN CRUD - CUERPO MEDICO
+
 
